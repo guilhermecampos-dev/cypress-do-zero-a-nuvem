@@ -79,10 +79,9 @@ it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obr
   cy.get('.error').should('be.visible')
 })
 
-it('envia o formuário com sucesso usando um comando customizado', () => {
+it.only('envia o formuário com sucesso usando um comando customizado', () => {
   cy.fillMandatoryFieldsAndSubmit()
 
   cy.get('.success').should('be.visible')
-})
-
+  })
 })
