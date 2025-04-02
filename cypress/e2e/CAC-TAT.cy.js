@@ -36,7 +36,7 @@ describe('Central de Atendimento ao Cliente TAT', () => {
       .should('have.value', '')
   })
 
-  it.only('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', () => {
+  it('exibe mensagem de erro quando o telefone se torna obrigatório mas não é preenchido antes do envio do formulário', () => {
     cy.get('#firstName').type('Gui')
     cy.get('#lastName').type('Campos')
     cy.get('#email').type('guimcampos@gmail,com')
@@ -48,5 +48,41 @@ describe('Central de Atendimento ao Cliente TAT', () => {
 
     
   })
+
+  it('preenche e limpa os campos nome, sobrenome, email e telefone', () => {
+    cy.get('#firstName')
+      .type('Gui')
+      .should('have.value','Gui')
+      .clear()
+      .should('have.value','')
+    cy.get('#lastName')
+      .type('Campos')
+      .should('have.value','Campos')
+      .clear()
+      .should('have.value','')
+    cy.get('#email')
+      .type('guimcampos@gmail.com')
+      .should('have.value','guimcampos@gmail.com')
+      .clear()
+      .should('have.value','')
+    cy.get('#phone')
+      .type('123456789')
+      .should('have.value','123456789')
+      .clear()
+      .should('have.value','')
+      
+  })
+
+it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', () => {
+  cy.get('button[type="submit"]').click()
+
+  cy.get('.error').should('be.visible')
 })
 
+it.only('envia o formuário com sucesso usando um comando customizado', () => {
+  cy.fillMandatoryFieldsAndSubmit()
+
+  cy.get('.success').should('be.visible')
+})
+
+})
