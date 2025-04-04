@@ -80,7 +80,14 @@ it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obr
 })
 
 it.only('envia o formuário com sucesso usando um comando customizado', () => {
-  cy.fillMandatoryFieldsAndSubmit()
+  const  data = {
+    firstName:'Guilherme',
+    lastName:'Campos',
+    email:'guimcampos@gmail.com',
+    text:'Teste.'
+
+  }
+  cy.fillMandatoryFieldsAndSubmit(data)
 
   cy.get('.success').should('be.visible')
   })
