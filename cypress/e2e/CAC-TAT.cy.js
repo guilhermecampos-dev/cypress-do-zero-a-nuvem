@@ -1,4 +1,3 @@
-/* Aula 1 */
 describe('Central de Atendimento ao Cliente TAT', () => {
   beforeEach(() => {
     cy.visit('./src/index.html')
@@ -93,7 +92,7 @@ it('envia o formuário com sucesso usando um comando customizado', () => {
   cy.get('.success').should('be.visible')
   })
 
-  /* Aula 2 */
+
 it('seleciona um produto (YouTube) por seu texto', () => {
   cy.get('#product')
     .select('YouTube')
@@ -112,7 +111,7 @@ it('seleciona um produto (Blog) por seu índice', () => {
     .should('have.value','blog')
 })
 
-/* Aula 3 */
+
 it('marca o tipo de atendimento "Feedback"', () => {
   cy.get('input[type="radio"][value="feedback"]')
   .check()
@@ -147,7 +146,8 @@ it('seleciona um arquivo da pasta fixtures', () =>{
 })
 
 it('seleciona um arquivo simulando um drag-and-drop',() =>{
-  cy.get('#file-upload').selectFile('cypress/fixtures/example.json', {action: 'drag-drop'})
+  cy.get('#file-upload')
+    .selectFile('cypress/fixtures/example.json', {action: 'drag-drop'})
     .should( input => {
       expect(input[0].files[0].name).to.equal('example.json')
     })
@@ -160,5 +160,20 @@ it('seleciona um arquivo utilizando uma fixture para a qual foi dada um alias', 
     .should( input => {
     expect(input[0].files[0].name).to.equal('example.json')
 })
+})
+
+it('verifica que a política de privacidade abre em outra aba sem a necessidade de um clique', () => {
+  cy.contains('a','Política de Privacidade')
+    .should('have.attr', 'href', 'privacy.html')
+    .and('have.attr', 'target', '_blank')
+})
+
+it('acessa a página da política de privacidade removendo o target e então clicando no link', () => {
+  cy.contains('a', 'Política de Privacidade')
+    .invoke('removeAttr', 'target')
+    .click()
+
+  cy.contains('h1', 'CAC TAT - Política de Privacidade')
+    .should('be.visible')
 })
 })
