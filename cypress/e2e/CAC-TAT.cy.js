@@ -129,13 +129,11 @@ it('marca cada tipo de atendimento', () => {
 /*Marcando (e desmarcando) inputs do tipo checkbox*/
 it('marca ambos checkboxes, depois desmarca o último', ()=>{
   cy.get('input[type="checkbox"]')
-    .each( typeOfService => {
-      cy.wrap(typeOfService)
-        .check()
-        .should('be.checked')
-  }).last()
-    .uncheck()
-    .should('not.be.checked')
+  .check()
+  .should('be.checked')
+  .last()
+  .uncheck()
+  .should('not.be.checked')
 })
 /* selecfile */
 it('seleciona um arquivo da pasta fixtures', () =>{
