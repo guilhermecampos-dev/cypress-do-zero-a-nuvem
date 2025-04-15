@@ -231,7 +231,7 @@ it('faz uma requisição HTTP', () => {
     .its('body')
     .should('include', 'CAC TAT')
   })
-it.only('encontre o gato', () => {
+it('encontre o gato', () => {
   cy.get('#cat')
     .invoke('show')
     .should('be.visible')
